@@ -1,41 +1,21 @@
 {
   "project_info": {
-    "project_number": "517637478860",
-    "firebase_url": "https://library-management-d62e6-default-rtdb.firebaseio.com",
-    "project_id": "library-management-d62e6",
-    "storage_bucket": "library-management-d62e6.firebasestorage.app"
+    "project_number": "254020979059",
+    "project_id": "ctb-attendance-monitorin-4ead4",
+    "storage_bucket": "ctb-attendance-monitorin-4ead4.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:517637478860:android:b340c01a7a6d30a26d2569",
+        "mobilesdk_app_id": "1:254020979059:android:ca3942d922258b618bdd06",
         "android_client_info": {
-          "package_name": "com.library_management.admin"
+          "package_name": "com.attendancemonitoring.web"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCymB3QkPVOFCpd6hE4LL0EevBy3FSQ8QI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:517637478860:android:81ffc87fb0455eae6d2569",
-        "android_client_info": {
-          "package_name": "com.library_management.students"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCymB3QkPVOFCpd6hE4LL0EevBy3FSQ8QI"
+          "current_key": "AIzaSyDM0F2XXZVJj6FIReNr61QdS9R5NalcjR0"
         }
       ],
       "services": {
