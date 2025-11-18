@@ -16,7 +16,7 @@ class ScreenLoaders{
               height: double.infinity,
               color: Colors.white.withOpacity(0.2),
               child: Center(
-                child: CircularProgressIndicator(color: colors.umber,)
+                child: CircularProgressIndicator(color: colors.brown,)
               ),
             ),
           );

@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:254020979059:ios:279af52edde0d22c8bdd06</string>
+	<key>DATABASE_URL</key>
+	<string>https://ctb-attendance-monitorin-4ead4-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

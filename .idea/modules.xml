@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/library_book.iml" filepath="$PROJECT_DIR$/library_book.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ctb_attendance_monitoring.iml" filepath="$PROJECT_DIR$/ctb_attendance_monitoring.iml" />
       <module fileurl="file://$PROJECT_DIR$/android/library_book_android.iml" filepath="$PROJECT_DIR$/android/library_book_android.iml" />
     </modules>
   </component>

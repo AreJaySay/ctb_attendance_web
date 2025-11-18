@@ -1,10 +1,13 @@
-import 'package:ctb_attendance_monitoring/credentials/register.dart';
+import 'package:ctb_attendance_monitoring/credentials/components/admin.dart';
+import 'package:ctb_attendance_monitoring/credentials/components/teacher.dart';
 import 'package:ctb_attendance_monitoring/utils/palettes/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/button.dart';
+import '../widgets/button.dart';
 
 class AccountType extends StatefulWidget {
+  final Function() onCallBack;
+  AccountType({required this.onCallBack});
   @override
   State<AccountType> createState() => _AccountTypeState();
 }
@@ -17,7 +20,26 @@ class _AccountTypeState extends State<AccountType> {
   @override
   Widget build(BuildContext context) {
     return _goToForm ?
-    RegisterPage(type: _type,) :
+    _type == "admin" ?
+    AdminRegister(
+      onBack: (value){
+        setState(() {
+          _goToForm = false;
+        });
+        if(value == "account_created"){
+          widget.onCallBack();
+        }
+      },
+    ) : TeacherRegister(
+      onBack: (value){
+        setState(() {
+          _goToForm = false;
+        });
+        if(value == "account_created"){
+          widget.onCallBack();
+        }
+      },
+    ) :
     Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,6 +50,7 @@ class _AccountTypeState extends State<AccountType> {
           ),
           Container(
             height: 55,
+            padding: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               border: Border.all(color: colors.lightblue),
               borderRadius: BorderRadius.circular(10)
@@ -48,6 +71,7 @@ class _AccountTypeState extends State<AccountType> {
                 ),
                 Image(
                   width: 23,
+                  color: colors.blue,
                   image: AssetImage("assets/icons/type_teacher.png"),
                 ),
                 SizedBox(
@@ -62,6 +86,7 @@ class _AccountTypeState extends State<AccountType> {
           ),
           Container(
             height: 55,
+            padding: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
                 border: Border.all(color: colors.lightblue),
                 borderRadius: BorderRadius.circular(10)
@@ -82,6 +107,7 @@ class _AccountTypeState extends State<AccountType> {
                 ),
                 Image(
                   width: 23,
+                  color: colors.blue,
                   image: AssetImage("assets/icons/type_admin.png"),
                 ),
                 SizedBox(

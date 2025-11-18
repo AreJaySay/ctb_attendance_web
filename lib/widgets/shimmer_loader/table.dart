@@ -1,7 +1,7 @@
 import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/palettes/app_colors.dart' hide Colors;
+import '../../utils/palettes/app_colors.dart' hide Colors;
 
 class TableLoader extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _TableLoaderState extends State<TableLoader> {
       scrollDirection: Axis.vertical,
       controller: _scrollController,
       child: Table(
-        border: TableBorder.all(color: colors.umber.withOpacity(0.1)),
+        border: TableBorder.all(color: colors.brown.withOpacity(0.1)),
         columnWidths: const <int, TableColumnWidth>{
           0: FixedColumnWidth(150),
           1: FixedColumnWidth(150),

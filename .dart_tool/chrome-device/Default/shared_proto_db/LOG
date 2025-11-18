@@ -1,12 +1,9 @@
-<<<<<<< HEAD
-2025/09/08-18:49:35.423 33fd6 Reusing MANIFEST /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.8ngfbB/flutter_tools_chrome_device.qD9xbN/Default/shared_proto_db/MANIFEST-000001
-2025/09/08-18:49:35.423 33fd6 Recovering log #3
-2025/09/08-18:49:35.424 33fd6 Reusing old log /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.8ngfbB/flutter_tools_chrome_device.qD9xbN/Default/shared_proto_db/000003.log 
-=======
-2025/09/01-10:42:55.207 134a9 Reusing MANIFEST /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.3VNxQG/flutter_tools_chrome_device.ZNT1yL/Default/shared_proto_db/MANIFEST-000001
-2025/09/01-10:42:55.207 134a9 Recovering log #3
-2025/09/01-10:42:55.207 134a9 Reusing old log /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.3VNxQG/flutter_tools_chrome_device.ZNT1yL/Default/shared_proto_db/000003.log 
-2025/09/01-10:43:05.534 1349d Level-0 table #5: started
-2025/09/01-10:43:05.536 1349d Level-0 table #5: 125292 bytes OK
-2025/09/01-10:43:05.537 1349d Delete type=0 #3
->>>>>>> origin/main
+2025/11/17-21:25:00.124 104f97 Reusing MANIFEST /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.Cw27p0/flutter_tools_chrome_device.Z2ZWXZ/Default/shared_proto_db/MANIFEST-000001
+2025/11/17-21:25:00.124 104f97 Recovering log #10
+2025/11/17-21:25:00.125 104f97 Reusing old log /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.Cw27p0/flutter_tools_chrome_device.Z2ZWXZ/Default/shared_proto_db/000010.log 
+2025/11/17-21:25:00.125 104f97 Delete type=0 #7
+2025/11/17-21:25:00.125 104f97 Delete type=0 #4
+2025/11/17-21:25:00.125 104f97 Delete type=0 #3
+2025/11/17-21:25:13.316 104f84 Level-0 table #14: started
+2025/11/17-21:25:13.319 104f84 Level-0 table #14: 126189 bytes OK
+2025/11/17-21:25:13.321 104f84 Delete type=0 #10

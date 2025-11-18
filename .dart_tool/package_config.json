@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "_flutterfire_internals",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/_flutterfire_internals-1.3.61",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/_flutterfire_internals-1.3.63",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -18,6 +18,18 @@
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/another_xlider-1.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "archive",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/archive-4.0.7",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "args",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/args-2.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "async",
@@ -40,6 +52,18 @@
     {
       "name": "characters",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/characters-1.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "checked_yaml",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/checked_yaml-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.8"
+    },
+    {
+      "name": "cli_util",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/cli_util-0.4.2",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -74,10 +98,28 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "cross_file",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/cross_file-0.3.4+2",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "crypto",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/crypto-3.0.7",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/cupertino_icons-1.0.8",
       "packageUri": "lib/",
       "languageVersion": "3.1"
+    },
+    {
+      "name": "dbus",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/dbus-0.7.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "delayed_widget",
@@ -116,20 +158,26 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "file_picker",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/file_picker-10.3.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "firebase_core",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_core-4.1.0",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_core-4.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_core_platform_interface",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_core_platform_interface-6.0.0",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_core_platform_interface-6.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_core_web",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_core_web-3.1.0",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_core_web-3.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -152,10 +200,64 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "firebase_storage",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_storage-13.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "firebase_storage_platform_interface",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_storage_platform_interface-5.2.14",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "firebase_storage_web",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/firebase_storage_web-3.10.21",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///Users/rolandoc./Documents/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.8"
+    },
+    {
+      "name": "flutter_image_compress",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_image_compress-2.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_image_compress_common",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_image_compress_common-1.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_image_compress_macos",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_image_compress_macos-1.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_image_compress_ohos",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_image_compress_ohos-0.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_image_compress_platform_interface",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_image_compress_platform_interface-1.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_image_compress_web",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_image_compress_web-0.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_keyboard_visibility",
@@ -194,6 +296,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_launcher_icons",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.14.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_lints-5.0.0",
       "packageUri": "lib/",
@@ -203,7 +311,13 @@
       "name": "flutter_localizations",
       "rootUri": "file:///Users/rolandoc./Documents/flutter/packages/flutter_localizations",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.8"
+    },
+    {
+      "name": "flutter_plugin_android_lifecycle",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.32",
+      "packageUri": "lib/",
+      "languageVersion": "3.9"
     },
     {
       "name": "flutter_side_menu",
@@ -215,13 +329,37 @@
       "name": "flutter_test",
       "rootUri": "file:///Users/rolandoc./Documents/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.8"
     },
     {
       "name": "flutter_web_plugins",
       "rootUri": "file:///Users/rolandoc./Documents/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.8"
+    },
+    {
+      "name": "hex",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/hex-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/http-1.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/http_parser-4.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "image",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/image-4.5.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "intl",
@@ -230,20 +368,26 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "json_annotation",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/json_annotation-4.9.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "leak_tracker",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/leak_tracker-10.0.9",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/leak_tracker-11.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_flutter_testing",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.9",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.10",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_testing",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.1",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -290,6 +434,24 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "path_provider",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/path_provider-2.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "path_provider_android",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/path_provider_android-2.2.20",
+      "packageUri": "lib/",
+      "languageVersion": "3.9"
+    },
+    {
+      "name": "path_provider_foundation",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/path_provider_foundation-2.4.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.9"
+    },
+    {
       "name": "path_provider_linux",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1",
       "packageUri": "lib/",
@@ -308,6 +470,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "petitparser",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/petitparser-7.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.8"
+    },
+    {
       "name": "platform",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/platform-3.1.6",
       "packageUri": "lib/",
@@ -316,6 +484,12 @@
     {
       "name": "plugin_platform_interface",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "posix",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/posix-6.0.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -371,7 +545,7 @@
       "name": "sky_engine",
       "rootUri": "file:///Users/rolandoc./Documents/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.8"
     },
     {
       "name": "source_span",
@@ -405,15 +579,21 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/test_api-0.7.4",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/test_api-0.7.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "typed_data",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/typed_data-1.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/vector_math-2.1.4",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/vector_math-2.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "3.1"
     },
     {
       "name": "vm_service",
@@ -428,21 +608,39 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "win32",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/win32-5.15.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.8"
+    },
+    {
       "name": "xdg_directories",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/xdg_directories-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
-      "name": "library_book",
+      "name": "xml",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/xml-6.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.8"
+    },
+    {
+      "name": "yaml",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/yaml-3.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "ctb_attendance_monitoring",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.8"
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.8.1",
+  "generatorVersion": "3.9.2",
   "flutterRoot": "file:///Users/rolandoc./Documents/flutter",
-  "flutterVersion": "3.32.8",
+  "flutterVersion": "3.35.7",
   "pubCache": "file:///Users/rolandoc./.pub-cache"
 }

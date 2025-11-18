@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-2025/09/08-18:49:35.277 33fc9 Reusing MANIFEST /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.8ngfbB/flutter_tools_chrome_device.qD9xbN/Default/Sync Data/LevelDB/MANIFEST-000001
-2025/09/08-18:49:35.278 33fc9 Recovering log #3
-2025/09/08-18:49:35.278 33fc9 Reusing old log /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.8ngfbB/flutter_tools_chrome_device.qD9xbN/Default/Sync Data/LevelDB/000003.log 
-=======
-2025/09/01-10:42:55.030 1349b Reusing MANIFEST /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.3VNxQG/flutter_tools_chrome_device.ZNT1yL/Default/Sync Data/LevelDB/MANIFEST-000001
-2025/09/01-10:42:55.034 1349b Recovering log #3
-2025/09/01-10:42:55.034 1349b Reusing old log /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.3VNxQG/flutter_tools_chrome_device.ZNT1yL/Default/Sync Data/LevelDB/000003.log 
->>>>>>> origin/main
+2025/11/17-21:24:59.771 104f95 Reusing MANIFEST /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.Cw27p0/flutter_tools_chrome_device.Z2ZWXZ/Default/Sync Data/LevelDB/MANIFEST-000001
+2025/11/17-21:24:59.776 104f95 Recovering log #3
+2025/11/17-21:24:59.776 104f95 Reusing old log /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.Cw27p0/flutter_tools_chrome_device.Z2ZWXZ/Default/Sync Data/LevelDB/000003.log 

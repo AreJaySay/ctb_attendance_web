@@ -7,5 +7,5 @@ class AppGradientColors{
   static LinearGradient gradient = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: <Color>[colors.umber, Color.fromRGBO(87, 177, 200, 0.9)]);
+      colors: <Color>[colors.brown, Color.fromRGBO(87, 177, 200, 0.9)]);
 }

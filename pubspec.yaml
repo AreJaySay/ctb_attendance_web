@@ -1,4 +1,4 @@
-name: library_book
+name: ctb_attendance_monitoring
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -48,13 +48,29 @@ dependencies:
   flutter_side_menu: ^0.5.41
   dropdown_button2: ^2.3.9
   fade_shimmer: ^2.4.0
+  flutter_launcher_icons: ^0.14.4
+  hex: ^0.2.0
+
+  # MEDIA
+  file_picker: ^10.3.3
+  flutter_image_compress: ^2.4.0
+  path_provider: ^2.1.5
 
   # FIREBASE
   firebase_database: ^12.0.0
   firebase_core: ^4.1.0
   cloud_firestore: ^6.0.1
+  firebase_storage: ^13.0.3
   firebase_core_platform_interface: any
   firebase_database_platform_interface: any
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/logos/main_logo.png"
+  adaptive_icon_foreground: "assets/logos/main_logo.png"
+  adaptive_icon_background: "#FF0000"
 
 dev_dependencies:
   flutter_test:

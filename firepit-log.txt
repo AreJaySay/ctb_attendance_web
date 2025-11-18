@@ -10,10 +10,9 @@ Checking for npm/bin/npm-cli install at /Users/rolandoc./.cache/firebase/tools/l
 Checking for npm/bin/npm-cli install at /Users/rolandoc./.cache/firebase/tools/node_modules/npm/bin/npm-cli
 Checking for npm/bin/npm-cli install at /snapshot/firepit/node_modules/npm/bin/npm-cli
 Found npm/bin/npm-cli install.
-ShellJSInternalError: ENOENT: no such file or directory, unlink '/Users/rolandoc./.cache/firebase/runtime/node'
 Runtime binaries created.
 /usr/local/bin/firebase
-/usr/local/bin/firebase,/snapshot/firepit/firepit.js,--version
+/usr/local/bin/firebase,/snapshot/firepit/firepit.js,apps:sdkconfig,ios,1:254020979059:ios:279af52edde0d22c8bdd06,--json
 Checking for npm/bin/npm-cli install at /Users/rolandoc./.cache/firebase/tools/lib/node_modules/npm/bin/npm-cli
 Checking for npm/bin/npm-cli install at /Users/rolandoc./.cache/firebase/tools/node_modules/npm/bin/npm-cli
 Checking for npm/bin/npm-cli install at /snapshot/firepit/node_modules/npm/bin/npm-cli
@@ -22,4 +21,4 @@ Checking for npm/bin/npm-cli install at /Users/rolandoc./.cache/firebase/tools/l
 Checking for npm/bin/npm-cli install at /Users/rolandoc./.cache/firebase/tools/node_modules/npm/bin/npm-cli
 Checking for npm/bin/npm-cli install at /snapshot/firepit/node_modules/npm/bin/npm-cli
 Found npm/bin/npm-cli install.
-ShellJSInternalError: ENOENT: no such file or directory, chmod '/Users/rolandoc./.cache/firebase/runtime/node.js'
+ShellJSInternalError: ENOENT: no such file or directory, chmod '/Users/rolandoc./.cache/firebase/runtime/node'
