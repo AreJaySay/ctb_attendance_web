@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../functions/loaders.dart';
+import '../../../models/user.dart';
 import '../../../services/apis/students.dart';
 import '../../../utils/palettes/app_colors.dart' hide Colors;
 import '../../../utils/snackbars/snackbar_message.dart';
@@ -29,8 +30,9 @@ class _EditModalState extends State<EditModal> {
   final ScreenLoaders _screenLoaders = new ScreenLoaders();
   final TextEditingController _name = TextEditingController();
   final TextEditingController _age = TextEditingController();
-  final TextEditingController _schoolid = TextEditingController();
-  String _department = "";
+  final TextEditingController _lrn = TextEditingController();
+  final TextEditingController _phone = TextEditingController();
+  String _gender = "";
   String _year = "";
   String _section = "";
   String _base64 = "";
@@ -57,8 +59,9 @@ class _EditModalState extends State<EditModal> {
     if(widget.isEdit){
       _name.text = widget.details["name"];
       _age.text = "${widget.details["age"]}";
-      _schoolid.text = "${widget.details["school_id"]}";
-      _department = widget.details["department"];
+      _lrn.text = "${widget.details["lrn"]}";
+      _phone.text = "${widget.details["phone"]}";
+      _gender = "${widget.details["gender"] ?? ""}";
       _year = widget.details["year"];
       _section = widget.details["section"];
       _base64 = widget.details["base64Image"];
@@ -72,7 +75,8 @@ class _EditModalState extends State<EditModal> {
     // TODO: implement dispose
     _name.dispose();
     _age.dispose();
-    _schoolid.dispose();
+    _lrn.dispose();
+    _phone.dispose();
     super.dispose();
   }
 
@@ -80,7 +84,7 @@ class _EditModalState extends State<EditModal> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 550,
-      height: 750,
+      height: userModel.loggedUser.value["type"] != "teacher" ? 800 : 650,
       child: Stack(
         clipBehavior: Clip.none,
         children: <Widget>[
@@ -178,11 +182,11 @@ class _EditModalState extends State<EditModal> {
                   height: 15,
                 ),
                 TextField(
-                  controller: _schoolid,
+                  controller: _lrn,
                   style: TextStyle(fontFamily: "OpenSans"),
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    hintText: 'School ID',
+                    hintText: 'LRN',
                     hintStyle: TextStyle(fontFamily: "OpenSans",color: Colors.grey),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(1000)
@@ -216,26 +220,24 @@ class _EditModalState extends State<EditModal> {
                     style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     items: <String>[
-                      'College of Arts and Science',
-                      'College of Education',
-                      'College of Nursing',
-                      'College of Engineering'
+                      'Male',
+                      'Female',
                     ].map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
                       );
                     }).toList(),
-                    hint: Text(_department.isEmpty
-                        ? 'Department'
-                        : _department,style: TextStyle(fontFamily: "OpenSans",fontSize: 16),),
+                    hint: Text(_gender.isEmpty
+                        ? 'Gender'
+                        : _gender,style: TextStyle(fontFamily: "OpenSans",fontSize: 16),),
                     borderRadius: BorderRadius.circular(10),
                     underline: SizedBox(),
                     isExpanded: true,
                     onChanged: (value) {
                       if (value != null) {
                         setState(() {
-                          _department = value;
+                          _gender = value;
                         });
                       }
                     },
@@ -244,108 +246,142 @@ class _EditModalState extends State<EditModal> {
                 SizedBox(
                   height: 15,
                 ),
-                Container(
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
-                      borderRadius: BorderRadius.all(Radius.circular(1000)),
+                TextField(
+                  controller: _phone,
+                  style: TextStyle(fontFamily: "OpenSans"),
+                  keyboardType: TextInputType.text,
+                  maxLength: 11,
+                  decoration: InputDecoration(
+                    counterText: "",
+                    hintText: 'Phone number',
+                    hintStyle: TextStyle(fontFamily: "OpenSans",color: Colors.grey),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(1000)
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(1000),
+                      borderSide: BorderSide(color: colors.blue.withOpacity(0.1)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(1000),
+                      borderSide: BorderSide(color: colors.blue.withOpacity(0.4)),
                     ),
                   ),
-                  child: DropdownButton<String>(
-                    focusColor: Colors.white,
-                    style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    items: <String>[
-                      '1st year',
-                      '2nd year',
-                      '3rd year',
-                      '4th year'
-                    ].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
-                      );
-                    }).toList(),
-                    hint: Text(_year.isEmpty
-                        ? 'Year'
-                        : _year,style: TextStyle(fontFamily: "OpenSans",fontSize: 16),),
-                    borderRadius: BorderRadius.circular(10),
-                    underline: SizedBox(),
-                    isExpanded: true,
-                    onChanged: (value) {
-                      if (value != null) {
-                        setState(() {
-                          _year = value;
-                        });
-                      }
-                    },
+                  onChanged: (text) {
+
+                  },
+                ),
+                if(userModel.loggedUser.value["type"] != "teacher")...{
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
-                      borderRadius: BorderRadius.all(Radius.circular(1000)),
+                  Container(
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
+                        borderRadius: BorderRadius.all(Radius.circular(1000)),
+                      ),
+                    ),
+                    child: DropdownButton<String>(
+                      focusColor: Colors.white,
+                      style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      items: <String>[
+                        'Grade 3',
+                        'Grade 4',
+                      ].map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
+                        );
+                      }).toList(),
+                      hint: Text(_year.isEmpty
+                          ? 'Year'
+                          : _year,style: TextStyle(fontFamily: "OpenSans",fontSize: 16, color: _year.isEmpty ? Colors.grey : Colors.black),),
+                      borderRadius: BorderRadius.circular(10),
+                      underline: SizedBox(),
+                      isExpanded: true,
+                      onChanged: (value) {
+                        if (value != null) {
+                          setState(() {
+                            _year = value;
+                            if(value == "Grade 3"){
+                              _section = "Acicia";
+                            }
+                          });
+                        }
+                      },
                     ),
                   ),
-                  child: DropdownButton<String>(
-                    focusColor: Colors.white,
-                    style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    items: <String>[
-                      'A',
-                      'B',
-                      'C',
-                      'D',
-                      'E',
-                    ].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
-                      );
-                    }).toList(),
-                    hint: Text(_section.isEmpty
-                        ? 'Section'
-                        : _section,style: TextStyle(fontFamily: "OpenSans",fontSize: 16),),
-                    borderRadius: BorderRadius.circular(10),
-                    underline: SizedBox(),
-                    isExpanded: true,
-                    onChanged: (value) {
-                      if (value != null) {
-                        setState(() {
-                          _section = value;
-                        });
-                      }
-                    },
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
+                  IgnorePointer(
+                    ignoring: _year != "Grade 4",
+                    child: Container(
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
+                          borderRadius: BorderRadius.all(Radius.circular(1000)),
+                        ),
+                      ),
+                      child: DropdownButton<String>(
+                        focusColor: Colors.white,
+                        style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        items: <String>[
+                          'Earth',
+                          'Jupiter',
+                        ].map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
+                          );
+                        }).toList(),
+                        hint: Text(_year.isEmpty
+                            ? 'Section'
+                            : _year != "Grade 4" ? "Acicia" : _section,style: TextStyle(fontFamily: "OpenSans",fontSize: 16, color: _year.isEmpty ? Colors.grey : Colors.black),),
+                        borderRadius: BorderRadius.circular(10),
+                        underline: SizedBox(),
+                        isExpanded: true,
+                        onChanged: (value) {
+                          if (value != null) {
+                            setState(() {
+                              _section = value;
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                },
                 Spacer(),
                 _materialbutton.materialButton(widget.isEdit ? "Update" : "Submit", (){
-                  if(_name.text.isEmpty || _age.text.isEmpty || _schoolid.text.isEmpty || _department == "" || _year == "" || _section == ""){
+                  if(_name.text.isEmpty || _age.text.isEmpty || _lrn.text.isEmpty || _phone == ""){
                     _snackbarMessage.snackbarMessage(context, message: "All fields are required.", is_error: true);
                   }else{
                     Map _payload = {
                       "name": _name.text,
                       "age": _age.text,
-                      "school_id": _schoolid.text,
-                      "department": _department,
-                      "year": _year,
-                      "section": _section,
+                      "lrn": _lrn.text,
+                      "phone": _phone.text,
+                      "gender": _gender,
+                      "year": userModel.loggedUser.value["type"] == "teacher" ? userModel.loggedUser.value["students_handled_grade"] : _year,
+                      "section": userModel.loggedUser.value["type"] == "teacher" ? userModel.loggedUser.value["students_handled_section"] : _section,
                       "base64Image": _base64,
                     };
+                    print(_payload);
                     _screenLoaders.functionLoader(context);
                     if(widget.isEdit){
-                      _studentApis.edit(old_school_id: widget.details["school_id"], payload: _payload).whenComplete((){
+                      _studentApis.edit(old_school_id: widget.details["lrn"], payload: _payload).whenComplete((){
                         Navigator.of(context).pop(null);
                         Navigator.of(context).pop(null);
                         _snackbarMessage.snackbarMessage(context, message: "Edit student details updated successfully!");
                       });
                     }else{
+                      print(_payload);
                       _studentApis.add(payload: _payload).whenComplete((){
                         Navigator.of(context).pop(null);
                         Navigator.of(context).pop(null);

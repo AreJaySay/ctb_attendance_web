@@ -1,0 +1,43 @@
+[
+  {
+    "id": 0,
+    "grade": "1",
+    "sections": [],
+    "selected_section": ""
+  },
+  {
+    "id": 1,
+    "grade": "2",
+    "sections": [],
+    "selected_section": ""
+  },
+  {
+    "id": 2,
+    "grade": "3",
+    "sections": [
+      "Acicia"
+    ],
+    "selected_section": ""
+  },
+  {
+    "id": 3,
+    "grade": "4",
+    "sections": [
+      "Earth",
+      "Jupiter"
+    ],
+    "selected_section": ""
+  },
+  {
+    "id": 4,
+    "grade": "5",
+    "sections": [],
+    "selected_section": ""
+  },
+  {
+    "id": 5,
+    "grade": "6",
+    "sections": [],
+    "selected_section": ""
+  }
+]

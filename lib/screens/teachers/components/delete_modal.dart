@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class DeleteModal extends StatefulWidget {
   final Map details;
-  DeleteModal({required this.details});
+  final Function() onDelete;
+  DeleteModal({required this.details, required this.onDelete});
   @override
   State<DeleteModal> createState() => _DeleteModalState();
 }
 
 class _DeleteModalState extends State<DeleteModal> {
-  final StudentApis _studentApis = new StudentApis();
   final ScreenLoaders _screenLoaders = new ScreenLoaders();
   final Materialbutton _materialbutton = new Materialbutton();
 
@@ -25,11 +25,11 @@ class _DeleteModalState extends State<DeleteModal> {
           SizedBox(
             height: 20,
           ),
-          Text("Delete student?", style: TextStyle(fontFamily: "OpenSans", fontWeight: FontWeight.w600,fontSize: 16),),
+          Text("Delete teacher?", style: TextStyle(fontFamily: "OpenSans", fontWeight: FontWeight.w600,fontSize: 16),),
           SizedBox(
             height: 5,
           ),
-          Text("Are you sure you want to delete this student?", style: TextStyle(fontFamily: "OpenSans"),),
+          Text("Are you sure you want to delete this teacher?", style: TextStyle(fontFamily: "OpenSans"),),
           Spacer(),
           Row(
             children: [
@@ -43,11 +43,7 @@ class _DeleteModalState extends State<DeleteModal> {
               ),
               Expanded(
                 child: _materialbutton.materialButton("Delete", (){
-                  _screenLoaders.functionLoader(context);
-                  _studentApis.delete(school_id: widget.details["teacher_id"]).whenComplete((){
-                    Navigator.of(context).pop(null);
-                    Navigator.of(context).pop(null);
-                  });
+                  widget.onDelete();
                 }, textColor: Colors.red, isWhiteBck: true),
               ),
             ],

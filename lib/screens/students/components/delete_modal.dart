@@ -44,7 +44,7 @@ class _DeleteModalState extends State<DeleteModal> {
               Expanded(
                 child: _materialbutton.materialButton("Delete", (){
                   _screenLoaders.functionLoader(context);
-                  _studentApis.delete(school_id: widget.details["school_id"]).whenComplete((){
+                  _studentApis.delete(school_id: widget.details["lrn"]).whenComplete((){
                     Navigator.of(context).pop(null);
                     Navigator.of(context).pop(null);
                   });

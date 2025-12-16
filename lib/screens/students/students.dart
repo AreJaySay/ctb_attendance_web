@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'package:ctb_attendance_monitoring/models/students.dart';
 import 'package:ctb_attendance_monitoring/screens/students/components/delete_modal.dart';
+import 'package:ctb_attendance_monitoring/screens/students/components/filter.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import '../../models/user.dart';
 import '../../services/apis/students.dart';
 import '../../services/routes.dart';
 import '../../utils/palettes/app_colors.dart' hide Colors;
 import '../../widgets/appbar.dart';
+import '../../widgets/no_data_widget.dart';
 import '../../widgets/shimmer_loader/table.dart';
 import 'components/edit_modal.dart';
 
@@ -21,7 +24,6 @@ class _StudentsState extends State<Students> {
   final Routes _routes = new Routes();
   final StudentApis _studentApis = new StudentApis();
   final _scrollController = ScrollController();
-  List? _toSearch;
 
   @override
   void initState() {
@@ -41,11 +43,12 @@ class _StudentsState extends State<Students> {
                 shadowColor: Colors.grey.shade200,
                 centerTitle: false,
                 backgroundColor: Colors.white,
-                flexibleSpace: Appbar(title: "STUDENTS", onchange: (text) {
-                  setState(() {
-                    // _students = _toSearch!.where((s) => s["name"].toString().toLowerCase().contains(text.toLowerCase())).toList();
-                  });
-                }, onAdd: (){
+                automaticallyImplyLeading: false,
+                flexibleSpace: Appbar(title: "STUDENTS", type: "students", onchange: (text) {
+                  List _res = studentsModel.valueSearch.where((s) => s["name"].toString().toLowerCase().contains(text.toLowerCase())).toList();
+                  studentsModel.update(data: _res);
+
+                }, onTeacherTab: (v){}, onPrint: (){}, onAdd: (){
                   showDialog<void>(
                       context: context,
                       builder: (context) => AlertDialog(
@@ -56,11 +59,47 @@ class _StudentsState extends State<Students> {
                           content: EditModal(isEdit: false,details: {})
                       )
                   );
-                }),
+                }, filterWidget: Visibility(
+                  visible: userModel.loggedUser.value["type"] != "teacher",
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                    ),
+                    onPressed: ()async{
+                      await showDialog<void>(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+                              ),
+                              content: Filter(
+                                onConfirm: (v) {
+                                  List _res = studentsModel.valueSearch.where((s) => s["year"] == "Grade ${v["grade"]}" && s["section"] == v["selected_section"]).toList();
+                                  studentsModel.update(data: _res);
+                                },
+                              )
+                          )
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text("Filter",style: TextStyle(fontFamily: "OpenSans",fontWeight: FontWeight.w600, color: colors.blue),),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Icon(Icons.arrow_drop_down_sharp,color: colors.blue,)
+                      ],
+                    ),
+                  ),
+                ),
+                ),
               ),
               backgroundColor: Colors.white,
               body: !snapshot.hasData ?
               TableLoader() :
+              snapshot.data!.isEmpty ?
+              NoDataWidget() :
               Stack(
                 children: [
                   Scrollbar(
@@ -76,10 +115,12 @@ class _StudentsState extends State<Students> {
                           2: FlexColumnWidth(),
                           3: FixedColumnWidth(100),
                           4: FlexColumnWidth(),
-                          5: FlexColumnWidth(),
-                          6: FixedColumnWidth(100),
-                          7: FixedColumnWidth(100),
+                          5: FixedColumnWidth(150),
+                          6: FixedColumnWidth(150),
+                          7: FixedColumnWidth(150),
                           8: FixedColumnWidth(150),
+                          9: FixedColumnWidth(150),
+
                         },
                         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                         children: <TableRow>[
@@ -92,10 +133,11 @@ class _StudentsState extends State<Students> {
                               TableCell(child: Center(child: Text('Photo',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
                               TableCell(child: Center(child: Text('Name',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
                               TableCell(child: Center(child: Text('Age',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                              TableCell(child: Center(child: Text('School ID',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                              TableCell(child: Center(child: Text('Department',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                              TableCell(child: Center(child: Text('LRN',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                              TableCell(child: Center(child: Text('Gender',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
                               TableCell(child: Center(child: Text('Year',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
                               TableCell(child: Center(child: Text('Section',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                              TableCell(child: Center(child: Text('Phone number',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
                               TableCell(child: Center(child: Text('Action',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
                             ],
                           ),
@@ -129,10 +171,11 @@ class _StudentsState extends State<Students> {
                                 ),
                                 TableCell(child: Center(child: Text('${snapshot.data![x]["name"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
                                 TableCell(child: Center(child: Text('${snapshot.data![x]["age"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
-                                TableCell(child: Center(child: Text('${snapshot.data![x]["school_id"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
-                                TableCell(child: Center(child: Text('${snapshot.data![x]["department"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                                TableCell(child: Center(child: Text('${snapshot.data![x]["lrn"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                                TableCell(child: Center(child: Text('${snapshot.data![x]["gender"] ?? "--"}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
                                 TableCell(child: Center(child: Text('${snapshot.data![x]["year"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
                                 TableCell(child: Center(child: Text('${snapshot.data![x]["section"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                                TableCell(child: Center(child: Text('${snapshot.data![x]["phone"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
                                 TableCell(child: Center(child: DropdownButtonHideUnderline(
                                   child: DropdownButton2(
                                     customButton: Icon(

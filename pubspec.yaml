@@ -50,6 +50,8 @@ dependencies:
   fade_shimmer: ^2.4.0
   flutter_launcher_icons: ^0.14.4
   hex: ^0.2.0
+  printing: ^5.14.2
+  pdf: ^3.11.3
 
   # MEDIA
   file_picker: ^10.3.3
@@ -98,12 +100,7 @@ flutter:
   assets:
      - assets/icons/
      - assets/logos/
-     - assets/jsons/students.json
-     - assets/jsons/logbooks.json
-     - assets/jsons/books.json
-     - assets/jsons/borrowers.json
-     - assets/jsons/reservations.json
-
+     - assets/jsons/filter_student.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

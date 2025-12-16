@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:ctb_attendance_monitoring/credentials/components/admin.dart';
 import 'package:ctb_attendance_monitoring/models/converter.dart';
+import 'package:ctb_attendance_monitoring/models/teachers.dart';
+import 'package:ctb_attendance_monitoring/models/user.dart';
 import 'package:ctb_attendance_monitoring/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/users.dart';
+import '../models/admin.dart';
 import '../screens/landing.dart';
 import '../services/routes.dart';
 import '../utils/palettes/app_colors.dart' hide Colors;
@@ -116,7 +118,7 @@ class _LoginState extends State<Login> {
                                     SizedBox(
                                       height: 30,
                                     ),
-                                    Text("Username",style: TextStyle(fontFamily: "regular",fontSize: 16,color: Colors.black),),
+                                    Text("Email address",style: TextStyle(fontFamily: "regular",fontSize: 16,color: Colors.black),),
                                     SizedBox(
                                       height: 5,
                                     ),
@@ -124,7 +126,7 @@ class _LoginState extends State<Login> {
                                       controller: _email,
                                       style: TextStyle(fontFamily: "OpenSans"),
                                       decoration: InputDecoration(
-                                        hintText: "Enter username",
+                                        hintText: "Enter email address",
                                         hintStyle: TextStyle(fontFamily: "OpenSans", color: Colors.grey),
                                         focusedBorder:OutlineInputBorder(
                                           borderSide: BorderSide(color: colors.blue, width: 1),
@@ -194,13 +196,17 @@ class _LoginState extends State<Login> {
                                     _isLoading ?
                                     Container(
                                       width: double.infinity,
-                                      height: 60,
+                                      height: 55,
                                       decoration: BoxDecoration(
                                           color: colors.blue,
-                                          borderRadius: BorderRadius.circular(10)
+                                          borderRadius: BorderRadius.circular(1000)
                                       ),
                                       child: Center(
-                                          child: CircularProgressIndicator(color: Colors.white,)
+                                          child: SizedBox(
+                                            width: 25,
+                                            height: 25,
+                                            child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3,),
+                                          )
                                       ),
                                     ) :
                                     _materialbutton.materialButton("Login", ()async{
@@ -214,15 +220,16 @@ class _LoginState extends State<Login> {
                                         }else{
                                           _isLoading = true;
                                           Future.delayed(const Duration(seconds: 3), () async{
-                                            List _user = usersModel.value.where((s) => s["email"] == _email.text && converterModels.hexToString(s["pass"]) == _pass.text).toList();
-                                            print("USER RETURN ${_user}");
-                                            if(_user.isEmpty){
+                                            List _teachers = teachersModel.value.where((s) => s["email"] == _email.text).toList();
+                                            List _admin = adminModel.value.where((s) => s["email"] == _email.text && converterModels.hexToString(s["pass"]) == _pass.text).toList();
+                                            print("USER RETURN ${_admin} || ${_teachers}");
+                                            if(_admin.isEmpty && _teachers.isEmpty){
                                               setState(() {
                                                 _isLoading = false;
                                               });
                                               _snackbarMessage.snackbarMessage(context, message: "Invalid credentials!" ,is_error: true);
                                             }else{
-                                              usersModel.updateUser(data: _user.first);
+                                              userModel.updateUser(data: _teachers.isEmpty ? _admin.first : _teachers.first);
                                               _login(user: _email.text, pass: _pass.text);
                                             }
                                           });

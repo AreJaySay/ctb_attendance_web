@@ -8,12 +8,15 @@ class AttendanceModel{
 
   update({required List data}){
     subject.add(data);
-    search.add(data);
   }
 
   // TO SEARCH
   BehaviorSubject<List> search = new BehaviorSubject();
   Stream get streamSearch => search.stream;
   List get valueSearch => search.value;
+
+  updateSearch({required List data}){
+    search.add(data);
+  }
 }
 final AttendanceModel attendanceModel = new AttendanceModel();

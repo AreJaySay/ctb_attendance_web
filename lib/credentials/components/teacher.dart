@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'dart:ui';
 import 'package:crypto/crypto.dart';
-import 'package:ctb_attendance_monitoring/services/apis/users.dart';
+import 'package:ctb_attendance_monitoring/services/apis/admin.dart';
 import 'package:ctb_attendance_monitoring/widgets/button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class TeacherRegister extends StatefulWidget {
 class _TeacherRegisterState extends State<TeacherRegister> {
   final Routes _routes = new Routes();
   late PageController _pageController;
-  final UsersApis _usersApis = new UsersApis();
+  final TeacherApis _teacherApis = new TeacherApis();
   final Materialbutton _materialbutton = new Materialbutton();
   final SnackbarMessage _snackbarMessage = new SnackbarMessage();
   final TextEditingController _fname = new TextEditingController();
@@ -35,8 +35,9 @@ class _TeacherRegisterState extends State<TeacherRegister> {
   final TextEditingController _email = new TextEditingController();
   final TextEditingController _pass = new TextEditingController();
   final TextEditingController _confirmpass = new TextEditingController();
+  String _studentGrade = "";
+  String _studentSection = "";
   String _gender = "";
-  String _subject = "";
   bool _showPassword = true;
   bool _showConfirmPassword = true;
   int _currentPage = 0;
@@ -262,58 +263,6 @@ class _TeacherRegisterState extends State<TeacherRegister> {
                mainAxisAlignment: MainAxisAlignment.start,
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-                 Text("Subject",style: TextStyle(fontFamily: "regular",fontSize: 16,color: Colors.black),),
-                 SizedBox(
-                   height: 5,
-                 ),
-                 Container(
-                   decoration: ShapeDecoration(
-                     color: Colors.white,
-                     shape: RoundedRectangleBorder(
-                       side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
-                       borderRadius: BorderRadius.all(Radius.circular(1000)),
-                     ),
-                   ),
-                   child: DropdownButton<String>(
-                     focusColor: Colors.white,
-                     style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
-                     padding: EdgeInsets.symmetric(horizontal: 15),
-                     items: <String>[
-                       'Mother Tongue',
-                       'Filipino',
-                       'English',
-                       'Mathematics',
-                       'Science',
-                       'Araling Panlipunan (Social Studies)',
-                       'Edukasyon sa Pagpapakatao (EsP or Values Education)',
-                       'MAPEH'
-                     ].map((String value) {
-                       return DropdownMenuItem<String>(
-                         value: value,
-                         child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
-                       );
-                     }).toList(),
-                     hint: Text(_subject.isEmpty
-                         ? 'Enter subject'
-                         : _subject,style: TextStyle(fontFamily: "OpenSans",fontSize: 16),),
-                     borderRadius: BorderRadius.circular(10),
-                     underline: SizedBox(),
-                     isExpanded: true,
-                     onChanged: (value) {
-                       if (value != null) {
-                         setState(() {
-                           _subject = value;
-                         });
-                       }
-                     },
-                   ),
-                 ),
-               ],
-             ),
-             Column(
-               mainAxisAlignment: MainAxisAlignment.start,
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
                  Text("Phone number",style: TextStyle(fontFamily: "regular",fontSize: 16,color: Colors.black),),
                  SizedBox(
                    height: 5,
@@ -366,6 +315,104 @@ class _TeacherRegisterState extends State<TeacherRegister> {
                      enabledBorder: OutlineInputBorder(
                        borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
                        borderRadius: BorderRadius.circular(1000),
+                     ),
+                   ),
+                 ),
+               ],
+             ),
+             Column(
+               mainAxisAlignment: MainAxisAlignment.start,
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 Text("Students handled (Grade)",style: TextStyle(fontFamily: "regular",fontSize: 16,color: Colors.black),),
+                 SizedBox(
+                   height: 5,
+                 ),
+                 Container(
+                   decoration: ShapeDecoration(
+                     color: Colors.white,
+                     shape: RoundedRectangleBorder(
+                       side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
+                       borderRadius: BorderRadius.all(Radius.circular(1000)),
+                     ),
+                   ),
+                   child: DropdownButton<String>(
+                     focusColor: Colors.white,
+                     style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
+                     padding: EdgeInsets.symmetric(horizontal: 15),
+                     items: <String>[
+                       'Grade 3',
+                       'Grade 4',
+                     ].map((String value) {
+                       return DropdownMenuItem<String>(
+                         value: value,
+                         child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
+                       );
+                     }).toList(),
+                     hint: Text(_studentGrade.isEmpty
+                         ? 'Enter grade'
+                         : _studentGrade,style: TextStyle(fontFamily: "OpenSans",fontSize: 16),),
+                     borderRadius: BorderRadius.circular(10),
+                     underline: SizedBox(),
+                     isExpanded: true,
+                     onChanged: (value) {
+                       if (value != null) {
+                         setState(() {
+                           _studentGrade = value;
+                           if(value == "Grade 3"){
+                             _studentSection = "Acicia";
+                           }
+                         });
+                       }
+                     },
+                   ),
+                 ),
+               ],
+             ),
+             Column(
+               mainAxisAlignment: MainAxisAlignment.start,
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 Text("Students handled (Section)",style: TextStyle(fontFamily: "regular",fontSize: 16,color: Colors.black),),
+                 SizedBox(
+                   height: 5,
+                 ),
+                 IgnorePointer(
+                   ignoring: _studentGrade != "Grade 4",
+                   child: Container(
+                     decoration: ShapeDecoration(
+                       color: Colors.white,
+                       shape: RoundedRectangleBorder(
+                         side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
+                         borderRadius: BorderRadius.all(Radius.circular(1000)),
+                       ),
+                     ),
+                     child: DropdownButton<String>(
+                       focusColor: Colors.white,
+                       style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
+                       padding: EdgeInsets.symmetric(horizontal: 15),
+                       items: <String>[
+                         'Earth',
+                         'Jupiter',
+                       ].map((String value) {
+                         return DropdownMenuItem<String>(
+                           value: value,
+                           child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
+                         );
+                       }).toList(),
+                       hint: Text(_studentGrade.isEmpty
+                           ? 'Section'
+                           : _studentGrade != "Grade 4" ? "Acicia" : _studentSection,style: TextStyle(fontFamily: "OpenSans",fontSize: 16, color: _studentGrade.isEmpty ? Colors.grey : Colors.black),),
+                       borderRadius: BorderRadius.circular(10),
+                       underline: SizedBox(),
+                       isExpanded: true,
+                       onChanged: (value) {
+                         if (value != null) {
+                           setState(() {
+                             _studentSection = value;
+                           });
+                         }
+                       },
                      ),
                    ),
                  ),
@@ -477,7 +524,7 @@ class _TeacherRegisterState extends State<TeacherRegister> {
               ),
             ),
             Spacer(),
-            if(_currentPage == 8)...{
+            if(_currentPage == 9)...{
               IgnorePointer(
                 ignoring: _isLoading,
                 child: ElevatedButton(
@@ -491,13 +538,15 @@ class _TeacherRegisterState extends State<TeacherRegister> {
                       "age": _age.text,
                       "teacher_id": _teacherid.text,
                       "gender": _gender,
-                      "subject": _subject,
                       "phone": _phone.text,
                       "email": _email.text,
                       "pass": _stringToHex(_pass.text),
+                      "students_handled_grade": _studentGrade,
+                      "students_handled_section": _studentSection,
                       "base64Image": "",
+                      "status": "pending",
                     };
-                    if(_fname.text.isEmpty || _lname.text.isEmpty || _age.text.isEmpty || _teacherid.text.isEmpty || _gender == "" || _subject == "" || _phone.text.isEmpty || _email.text.isEmpty || _pass.text.isEmpty){
+                    if(_fname.text.isEmpty || _lname.text.isEmpty || _age.text.isEmpty || _teacherid.text.isEmpty || _gender == "" || _phone.text.isEmpty || _email.text.isEmpty || _pass.text.isEmpty){
                       _snackbarMessage.snackbarMessage(context, message: "All fields are required!", is_error: true);
                     }else if(_pass.text != _confirmpass.text){
                       _snackbarMessage.snackbarMessage(context, message: "Password and confirm password did not match!", is_error: true);
@@ -505,7 +554,7 @@ class _TeacherRegisterState extends State<TeacherRegister> {
                       setState(() {
                         _isLoading = true;
                         Future.delayed(const Duration(seconds: 5), () async{
-                          _usersApis.addTeacher(payload: _payload).whenComplete((){
+                          _teacherApis.add(payload: _payload).whenComplete((){
                             _isLoading = false;
                             widget.onBack("account_created");
                             _snackbarMessage.snackbarMessage(context, message: "New teacher successfully created!");

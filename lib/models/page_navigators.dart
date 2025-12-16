@@ -2,11 +2,11 @@ import 'package:rxdart/rxdart.dart';
 
 class PageNavigatorsModel{
   // NOTIFICATION PAGE CHECKER
-  BehaviorSubject<bool> subject = new BehaviorSubject();
+  BehaviorSubject<String> subject = new BehaviorSubject();
   Stream get stream => subject.stream;
-  bool get value => subject.value;
+  String get value => subject.value;
 
-  update({required bool data}){
+  update({required String data}){
     subject.add(data);
   }
 }

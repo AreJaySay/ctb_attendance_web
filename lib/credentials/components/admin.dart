@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'dart:ui';
-import 'package:ctb_attendance_monitoring/services/apis/users.dart';
+import 'package:ctb_attendance_monitoring/services/apis/admin.dart';
 import 'package:ctb_attendance_monitoring/widgets/button.dart';
 import 'package:flutter/material.dart';
 import '../../services/routes.dart';
@@ -17,7 +17,7 @@ class AdminRegister extends StatefulWidget {
 class _AdminRegisterState extends State<AdminRegister> {
   final Routes _routes = new Routes();
   late PageController _pageController;
-  final UsersApis _usersApis = new UsersApis();
+  final AdminApis _adminApis = new AdminApis();
   final Materialbutton _materialbutton = new Materialbutton();
   final SnackbarMessage _snackbarMessage = new SnackbarMessage();
   final TextEditingController _fname = new TextEditingController();
@@ -445,7 +445,7 @@ class _AdminRegisterState extends State<AdminRegister> {
                       setState(() {
                         _isLoading = true;
                         Future.delayed(const Duration(seconds: 5), () async{
-                          _usersApis.addAdmin(payload: _payload).whenComplete((){
+                          _adminApis.addAdmin(payload: _payload).whenComplete((){
                             _isLoading = false;
                             widget.onBack("account_created");
                             _snackbarMessage.snackbarMessage(context, message: "New admin successfully created!");

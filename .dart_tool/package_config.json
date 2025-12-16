@@ -44,6 +44,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "barcode",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/barcode-2.2.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "bidi",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/bidi-2.0.13",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/boolean_selector-2.1.2",
       "packageUri": "lib/",
@@ -411,9 +423,9 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/meta-1.16.0",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/meta-1.17.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.5"
     },
     {
       "name": "modal_bottom_sheet",
@@ -432,6 +444,12 @@
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/path-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
+    },
+    {
+      "name": "path_parsing",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/path_parsing-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "path_provider",
@@ -470,6 +488,18 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "pdf",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/pdf-3.11.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "pdf_widget_wrapper",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/pdf_widget_wrapper-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "petitparser",
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/petitparser-7.0.1",
       "packageUri": "lib/",
@@ -492,6 +522,18 @@
       "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/posix-6.0.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "printing",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/printing-5.14.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "qr",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/qr-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
     },
     {
       "name": "rxdart",
@@ -579,7 +621,7 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/test_api-0.7.6",
+      "rootUri": "file:///Users/rolandoc./.pub-cache/hosted/pub.dev/test_api-0.7.7",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -639,8 +681,8 @@
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.9.2",
+  "generatorVersion": "3.10.1",
   "flutterRoot": "file:///Users/rolandoc./Documents/flutter",
-  "flutterVersion": "3.35.7",
+  "flutterVersion": "3.38.3",
   "pubCache": "file:///Users/rolandoc./.pub-cache"
 }

@@ -13,12 +13,15 @@ class TeacherApis{
         final data = dataSnapshot.value;
         if (data is Map) {
           teachersModel.update(data: data.values.toList());
+          teachersModel.updateSearch(data: data.values.toList());
           print("TEACHERS ${data.values.toList()}");
         } else if (data is List) {
           teachersModel.update(data: data);
+          teachersModel.updateSearch(data: data);
         }
       } else {
         teachersModel.update(data: []);
+        teachersModel.updateSearch(data: []);
       }
     });
   }
@@ -26,12 +29,20 @@ class TeacherApis{
   Future add({required Map payload})async{
     DatabaseReference usersRef = database.ref('teachers');
     await usersRef.push().set({
-      "name": payload["name"],
+      "type": "teacher",
+      "fname": payload["fname"],
+      "lname": payload["lname"],
       "age": payload["age"],
       "teacher_id": payload["teacher_id"],
-      "department": payload["department"],
-      "year": payload["year"],
+      "gender": payload["gender"],
+      "subject": payload["subject"],
+      "phone": payload["phone"],
+      "email": payload["email"],
+      "pass": payload["pass"],
+      "students_handled_grade": payload["students_handled_grade"],
+      "students_handled_section": payload["students_handled_section"],
       "base64Image": payload["base64Image"],
+      "status": "pending",
     });
   }
   // EDIT TEACHER
@@ -39,12 +50,19 @@ class TeacherApis{
     DatabaseReference usersRef = database.ref('teachers');
     FirebaseDatabase.instance.ref().child('teachers').orderByChild("teacher_id").equalTo(old_teacher_id).onChildAdded.forEach((event)async{
       await usersRef.update({
-        "${event.snapshot.key!}/name": payload["name"],
+        "${event.snapshot.key!}/fname": payload["fname"],
+        "${event.snapshot.key!}/lname": payload["lname"],
         "${event.snapshot.key!}/age": payload["age"],
         "${event.snapshot.key!}/teacher_id": payload["teacher_id"],
-        "${event.snapshot.key!}/department": payload["department"],
-        "${event.snapshot.key!}/year": payload["year"],
+        "${event.snapshot.key!}/gender": payload["gender"],
+        "${event.snapshot.key!}/subject": payload["subject"],
+        "${event.snapshot.key!}/phone": payload["phone"],
+        "${event.snapshot.key!}/email": payload["email"],
+        "${event.snapshot.key!}/students_handled_grade": payload["students_handled_grade"],
+        "${event.snapshot.key!}/students_handled_section": payload["students_handled_section"],
+        "${event.snapshot.key!}/pass": payload["pass"],
         "${event.snapshot.key!}/base64Image": payload["base64Image"],
+        "${event.snapshot.key!}/status": payload["status"],
       });
     });
   }
@@ -55,5 +73,16 @@ class TeacherApis{
       await ref.remove();
     });
   }
-}
 
+  // ADD MEETING
+  Future addMeeting({required Map payload})async{
+    DatabaseReference usersRef = database.ref('meeting');
+    await usersRef.push().set({
+      "venue": payload["venue"],
+      "date": payload["date"],
+      "start_time": payload["start_time"],
+      "end_time": payload["end_time"],
+      "content": payload["content"],
+    });
+  }
+}

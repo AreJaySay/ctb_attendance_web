@@ -1,4 +1,6 @@
+import 'package:ctb_attendance_monitoring/models/user.dart';
 import 'package:ctb_attendance_monitoring/screens/attendance/attendance.dart';
+import 'package:ctb_attendance_monitoring/screens/notifications/notifications.dart';
 import 'package:ctb_attendance_monitoring/screens/reports/reports.dart';
 import 'package:ctb_attendance_monitoring/screens/students/students.dart';
 import 'package:ctb_attendance_monitoring/screens/teachers/teachers.dart';
@@ -6,8 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_side_menu/flutter_side_menu.dart';
 import 'package:ctb_attendance_monitoring/utils/palettes/app_colors.dart' hide Colors;
 
+import '../models/notifications.dart';
 import '../models/page_navigators.dart';
-import 'notifications.dart';
+import '../services/apis/notifications.dart';
+import '../utils/snackbars/notification_modal.dart';
+import 'announcements/announcements.dart';
 
 class Landing extends StatefulWidget {
   @override
@@ -16,16 +21,28 @@ class Landing extends StatefulWidget {
 
 class _LandingState extends State<Landing> {
   final SideMenuController _sideMenuController = SideMenuController();
-  List<String> _title = ["Students", "Teachers", "Attendance", "Reports"];
-  List<String> _icons = ["student", "teacher", "attendance", "reports"];
-  List<Widget> _pages = [Students(), Teachers(), Attendance(), Reports()];
+  final NotificationApis _notificationApis = new NotificationApis();
+  List<String>? _title ;
+  List<String>? _icons;
+  List<Widget>? _pages;
   int _selected = 0;
   bool _isCollapsed = false;
 
   @override
   void initState() {
     // TODO: implement initState
-    pageNavigatorsModel.update(data: false);
+    pageNavigatorsModel.update(data: "others");
+    if(userModel.loggedUser.value["type"] == "teacher"){
+      _title = ["Students", "Attendance", "Reports"];
+      _icons = ["student", "attendance", "reports"];
+      _pages = [Students(), Attendance(), Reports()];
+    }else{
+      _title = ["Students", "Teachers", "Attendance", "Reports"];
+      _icons = ["student", "teacher", "attendance", "reports"];
+      _pages = [Students(), Teachers(), Attendance(), Reports()];
+    }
+    _notificationApis.get();
+    _notificationChecker();
     super.initState();
   }
 
@@ -69,22 +86,22 @@ class _LandingState extends State<Landing> {
                 ),
               ),
               items: [
-                for(int x = 0; x < _title.length; x++)...{
+                for(int x = 0; x < _title!.length; x++)...{
                   SideMenuItemDataTile(
                     isSelected: _selected == x,
                     onTap: () {
                       setState(() {
                         _selected = x;
                       });
-                      pageNavigatorsModel.update(data: false);
+                      pageNavigatorsModel.update(data: "others");
                     },
-                    title: _title[x],
+                    title: _title![x],
                     icon: Center(
                       child: Image(
                         width: x == 2 || x == 3 ? 25 : 30,
                         height: x == 2 || x == 3 ? 25 : 30,
                         color: _selected == x ? Colors.white : colors.grey,
-                        image: AssetImage("assets/icons/${_icons[x]}.png"),
+                        image: AssetImage("assets/icons/${_icons![x]}.png"),
                       ),
                     ),
                     titleStyle: TextStyle(fontFamily: "OpenSans",fontSize: 15,fontWeight: FontWeight.w500),
@@ -119,9 +136,11 @@ class _LandingState extends State<Landing> {
             stream: pageNavigatorsModel.subject,
             builder: (context, snapshot) {
               return Expanded(
-                child: snapshot.data! ?
+                child: snapshot.data == "announcements" ?
+                Announcements() :
+                snapshot.data == "notifications" ?
                 Notifications() :
-                _pages[_selected],
+                _pages![_selected],
               );
             }
           )
@@ -162,5 +181,18 @@ class _LandingState extends State<Landing> {
         ),
       ),
     );
+  }
+  void _notificationChecker(){
+    Future.delayed(const Duration(seconds: 10), () {
+      _notificationApis.get().whenComplete((){
+        List _res = notificationModel.value.where((s) => s["is_showed"] == "0" && s["receiver"] == "admin").toList();
+        if(_res.isNotEmpty){
+          print("NOTIFICATIONS SHOW NOW ADMIN SIDE ${_res.first}");
+          notificationModal.showNotificModal(context, _res.first);
+          _notificationApis.showed(id: _res.first["id"]);
+        }
+        _notificationChecker();
+      });
+    });
   }
 }
