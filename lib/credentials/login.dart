@@ -56,7 +56,7 @@ class _LoginState extends State<Login> {
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.fill,
-            image: NetworkImage("https://scontent.fcgy2-4.fna.fbcdn.net/v/t1.6435-9/69911757_111993923512275_6413226899891290112_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=RCdYglyZQtUQ7kNvwFAMHj3&_nc_oc=Adk7ckkne3UuZBAFYmofZ22z50e8yEUjz41vu_BT7EOS5Gt-LME7NY8mQOVEO_ICedQ&_nc_zt=23&_nc_ht=scontent.fcgy2-4.fna&_nc_gid=6SG2qIDesFP20yvVfXtkhA&oh=00_AfiuRri8nEcEREAz1EoqUGLM-ueL1dCTMic1fm5al_DeYA&oe=693955A6"),
+            image: AssetImage("assets/images/login_background.jpg"),
           ),
           Container(
             width: double.infinity,
