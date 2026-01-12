@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui' as ui;
 import 'package:ctb_attendance_monitoring/functions/loaders.dart';
 import 'package:ctb_attendance_monitoring/models/teachers.dart';
 import 'package:ctb_attendance_monitoring/screens/teachers/components/create_meeting.dart';
@@ -7,8 +8,12 @@ import 'package:ctb_attendance_monitoring/services/apis/teachers.dart';
 import 'package:ctb_attendance_monitoring/widgets/no_data_widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import '../../models/user.dart';
 import '../../services/routes.dart';
 import '../../utils/palettes/app_colors.dart' hide Colors;
 import '../../widgets/appbar.dart';
@@ -27,6 +32,7 @@ class _TeachersState extends State<Teachers> {
   final ScreenLoaders _screenLoaders = new ScreenLoaders();
   final _scrollController = ScrollController();
   List? _toSearch;
+  final GlobalKey _printKey = GlobalKey();
   bool _isTeacherTab = true;
 
   @override
@@ -54,7 +60,11 @@ class _TeachersState extends State<Teachers> {
                   List _res = teachersModel.valueSearch.where((s) => s["fname"].toString().toLowerCase().contains(text.toLowerCase()) || s["lname"].toString().toLowerCase().contains(text.toLowerCase())).toList();
                   teachersModel.update(data: _res);
 
-                }, hasAddButton: false, onAdd: (){}, onPrint: (){}, onTeacherTab: (v){
+                }, hasAddButton: false, onAdd: (){}, isPrintable: userModel.loggedUser.value["type"] == "admin", onPrint: ()async{
+                  Uint8List img = await captureWidget();
+                  Uint8List pdf = await generatePdf(img);
+                  Printing.layoutPdf(onLayout: (_) => pdf);
+                }, onTeacherTab: (v){
                   setState(() {
                     _isTeacherTab = v;
                   });
@@ -67,131 +77,134 @@ class _TeachersState extends State<Teachers> {
               PendingTeachers() :
               _teachers.isEmpty ?
               NoDataWidget() :
-              Scrollbar(
-                controller: _scrollController,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+              RepaintBoundary(
+                key: _printKey,
+                child: Scrollbar(
                   controller: _scrollController,
-                  child: Table(
-                    border: TableBorder.all(color: colors.blue.withOpacity(0.1)),
-                    columnWidths: const <int, TableColumnWidth>{
-                      0: FixedColumnWidth(150),
-                      1: FixedColumnWidth(150),
-                      2: FlexColumnWidth(),
-                      3: FlexColumnWidth(),
-                      4: FlexColumnWidth(),
-                      5: FlexColumnWidth(),
-                      6: FlexColumnWidth(),
-                      7: FixedColumnWidth(130),
-                      8: FixedColumnWidth(100),
-                    },
-                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    children: <TableRow>[
-                      TableRow(
-                        children: <Widget>[
-                          TableCell(child: Padding(
-                            padding: EdgeInsetsGeometry.symmetric(vertical: 10),
-                            child: Center(child: Text('ID',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold),)),
-                          )),
-                          TableCell(child: Center(child: Text('Photo',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                          TableCell(child: Center(child: Text('Name',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                          TableCell(child: Center(child: Text('Age',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                          TableCell(child: Center(child: Text('Teacher ID',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                          TableCell(child: Center(child: Text('Email address',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                          TableCell(child: Center(child: Text('Phone number',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                          TableCell(child: Center(child: Text('Gender',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                          TableCell(child: Center(child: Text('Action',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
-                        ],
-                      ),
-                      for(int x = 0; x < _teachers.length; x++)...{
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    controller: _scrollController,
+                    child: Table(
+                      border: TableBorder.all(color: colors.blue.withOpacity(0.1)),
+                      columnWidths: const <int, TableColumnWidth>{
+                        0: FixedColumnWidth(150),
+                        1: FixedColumnWidth(150),
+                        2: FlexColumnWidth(),
+                        3: FlexColumnWidth(),
+                        4: FlexColumnWidth(),
+                        5: FlexColumnWidth(),
+                        6: FlexColumnWidth(),
+                        7: FixedColumnWidth(130),
+                        8: FixedColumnWidth(100),
+                      },
+                      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                      children: <TableRow>[
                         TableRow(
-                          decoration: BoxDecoration(
-                              color: Colors.white
-                          ),
                           children: <Widget>[
                             TableCell(child: Padding(
                               padding: EdgeInsetsGeometry.symmetric(vertical: 10),
-                              child: Center(child: Text('${x + 1}',style: TextStyle(fontFamily: "Roboto_normal"))),
+                              child: Center(child: Text('ID',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold),)),
                             )),
-                            TableCell(
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Center(
-                                  child: _teachers[x]["base64Image"] != "" ?
-                                  Image.memory(
-                                    base64Decode(_teachers[x]["base64Image"]),
-                                    width: 45,
-                                    height: 45,
-                                  ) :
-                                  Image(
-                                    image: NetworkImage("https://static.vecteezy.com/system/resources/thumbnails/035/857/779/small/people-face-avatar-icon-cartoon-character-png.png"),
-                                    width: 45,
-                                    height: 45,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            TableCell(child: Center(child: Text('${_teachers[x]["fname"]} ${_teachers[x]["lname"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
-                            TableCell(child: Center(child: Text('${_teachers[x]["age"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
-                            TableCell(child: Center(child: Text('${_teachers[x]["teacher_id"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
-                            TableCell(child: Center(child: Text('${_teachers[x]["email"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
-                            TableCell(child: Center(child: Text('${_teachers[x]["phone"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
-                            TableCell(child: Center(child: Text('${_teachers[x]["gender"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
-                            TableCell(child: Center(child: DropdownButtonHideUnderline(
-                              child: DropdownButton2(
-                                customButton: Icon(
-                                    Icons.more_vert,
-                                    color: colors.lightblue
-                                ),
-                                items: [
-                                  ...MenuItems.firstItems.map(
-                                        (item) => DropdownMenuItem<MenuItem>(
-                                      value: item,
-                                      child: MenuItems.buildItem(item),
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  MenuItems.onChanged(context, value! as MenuItem);
-                                  showDialog<void>(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                          backgroundColor: Colors.white,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(20.0))
-                                          ),
-                                          content: value.text == "Edit" ?
-                                          EditModal(details: _teachers[x],) :
-                                          DeleteModal(details: _teachers[x],onDelete: (){
-                                            _teacherApis.delete(teacher_id: _teachers[x]["teacher_id"]).whenComplete((){
-                                              Navigator.of(context).pop(null);
-                                            });
-                                          },)
-                                      )
-                                  );
-                                },
-                                dropdownStyleData: DropdownStyleData(
-                                  width: 160,
-                                  padding: const EdgeInsets.symmetric(vertical: 6),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: Colors.white,
-                                  ),
-                                  offset: const Offset(0, 8),
-                                ),
-                                menuItemStyleData: MenuItemStyleData(
-                                  customHeights: [
-                                    ...List<double>.filled(MenuItems.firstItems.length, 48),
-
-                                  ],
-                                  padding: const EdgeInsets.only(left: 16, right: 16),
-                                ),
-                              ),
-                            ))),
+                            TableCell(child: Center(child: Text('Photo',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                            TableCell(child: Center(child: Text('Name',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                            TableCell(child: Center(child: Text('Age',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                            TableCell(child: Center(child: Text('Teacher ID',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                            TableCell(child: Center(child: Text('Email address',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                            TableCell(child: Center(child: Text('Phone number',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                            TableCell(child: Center(child: Text('Gender',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
+                            TableCell(child: Center(child: Text('Action',style: TextStyle(fontFamily: "Roboto_normal",fontWeight: FontWeight.bold,fontSize: 15)))),
                           ],
                         ),
-                      }
-                    ],
+                        for(int x = 0; x < _teachers.length; x++)...{
+                          TableRow(
+                            decoration: BoxDecoration(
+                                color: Colors.white
+                            ),
+                            children: <Widget>[
+                              TableCell(child: Padding(
+                                padding: EdgeInsetsGeometry.symmetric(vertical: 10),
+                                child: Center(child: Text('${x + 1}',style: TextStyle(fontFamily: "Roboto_normal"))),
+                              )),
+                              TableCell(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Center(
+                                    child: _teachers[x]["base64Image"] != "" ?
+                                    Image.memory(
+                                      base64Decode(_teachers[x]["base64Image"]),
+                                      width: 45,
+                                      height: 45,
+                                    ) :
+                                    Image(
+                                      image: NetworkImage("https://static.vecteezy.com/system/resources/thumbnails/035/857/779/small/people-face-avatar-icon-cartoon-character-png.png"),
+                                      width: 45,
+                                      height: 45,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              TableCell(child: Center(child: Text('${_teachers[x]["fname"]} ${_teachers[x]["lname"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                              TableCell(child: Center(child: Text('${_teachers[x]["age"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                              TableCell(child: Center(child: Text('${_teachers[x]["teacher_id"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                              TableCell(child: Center(child: Text('${_teachers[x]["email"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                              TableCell(child: Center(child: Text('${_teachers[x]["phone"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                              TableCell(child: Center(child: Text('${_teachers[x]["gender"]}',style: TextStyle(fontFamily: "Roboto_normal"),textAlign: TextAlign.center,))),
+                              TableCell(child: Center(child: DropdownButtonHideUnderline(
+                                child: DropdownButton2(
+                                  customButton: Icon(
+                                      Icons.more_vert,
+                                      color: colors.lightblue
+                                  ),
+                                  items: [
+                                    ...MenuItems.firstItems.map(
+                                          (item) => DropdownMenuItem<MenuItem>(
+                                        value: item,
+                                        child: MenuItems.buildItem(item),
+                                      ),
+                                    ),
+                                  ],
+                                  onChanged: (value) {
+                                    MenuItems.onChanged(context, value! as MenuItem);
+                                    showDialog<void>(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                            backgroundColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(Radius.circular(20.0))
+                                            ),
+                                            content: value.text == "Edit" ?
+                                            EditModal(details: _teachers[x],) :
+                                            DeleteModal(details: _teachers[x],onDelete: (){
+                                              _teacherApis.delete(teacher_id: _teachers[x]["teacher_id"]).whenComplete((){
+                                                Navigator.of(context).pop(null);
+                                              });
+                                            },)
+                                        )
+                                    );
+                                  },
+                                  dropdownStyleData: DropdownStyleData(
+                                    width: 160,
+                                    padding: const EdgeInsets.symmetric(vertical: 6),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      color: Colors.white,
+                                    ),
+                                    offset: const Offset(0, 8),
+                                  ),
+                                  menuItemStyleData: MenuItemStyleData(
+                                    customHeights: [
+                                      ...List<double>.filled(MenuItems.firstItems.length, 48),
+
+                                    ],
+                                    padding: const EdgeInsets.only(left: 16, right: 16),
+                                  ),
+                                ),
+                              ))),
+                            ],
+                          ),
+                        }
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -221,6 +234,31 @@ class _TeachersState extends State<Teachers> {
           );
         }
     );
+  }
+  Future<Uint8List> captureWidget() async {
+    RenderRepaintBoundary boundary =
+    _printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+    ByteData? byteData =
+    await image.toByteData(format: ui.ImageByteFormat.png);
+    return byteData!.buffer.asUint8List();
+  }
+
+  Future<Uint8List> generatePdf(Uint8List imageBytes) async {
+    final pdf = pw.Document();
+    final image = pw.MemoryImage(imageBytes);
+    pdf.addPage(pw.Page(build: (ctx) => pw.Column(
+        mainAxisAlignment: pw.MainAxisAlignment.start,
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text("TEACHERS"),
+          pw.SizedBox(
+              height: 20
+          ),
+          pw.Image(image)
+        ]
+    )));
+    return pdf.save();
   }
 }
 

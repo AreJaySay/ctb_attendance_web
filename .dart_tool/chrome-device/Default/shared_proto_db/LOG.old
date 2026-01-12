@@ -1,15 +1,16 @@
-2025/12/18-19:15:10.279 138b86 Reusing MANIFEST /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.KhY9Xl/flutter_tools_chrome_device.cec9qA/Default/shared_proto_db/MANIFEST-000001
-2025/12/18-19:15:10.279 138b86 Recovering log #26
-2025/12/18-19:15:10.281 138b86 Reusing old log /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.KhY9Xl/flutter_tools_chrome_device.cec9qA/Default/shared_proto_db/000026.log 
-2025/12/18-19:15:10.282 138b86 Delete type=0 #13
-2025/12/18-19:15:10.282 138b86 Delete type=0 #7
-2025/12/18-19:15:10.282 138b86 Delete type=0 #4
-2025/12/18-19:15:10.282 138b86 Delete type=0 #10
-2025/12/18-19:15:10.282 138b86 Delete type=0 #16
-2025/12/18-19:15:10.282 138b86 Delete type=0 #3
-2025/12/18-19:15:10.282 138b86 Delete type=2 #14
-2025/12/18-19:15:10.282 138b86 Delete type=2 #17
-2025/12/18-19:15:10.282 138b86 Delete type=2 #11
-2025/12/18-19:15:10.282 138b86 Delete type=2 #8
-2025/12/18-19:15:10.282 138b86 Delete type=0 #19
-2025/12/18-19:15:10.282 138b86 Delete type=0 #23
+2026/01/07-20:45:08.981 f9818 Reusing MANIFEST /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.AeOsVC/flutter_tools_chrome_device.DdYxr1/Default/shared_proto_db/MANIFEST-000001
+2026/01/07-20:45:08.982 f9818 Recovering log #29
+2026/01/07-20:45:08.982 f9818 Reusing old log /private/var/folders/hh/f3zvdxmx0pvgmmq1f355wlx40000gn/T/flutter_tools.AeOsVC/flutter_tools_chrome_device.DdYxr1/Default/shared_proto_db/000029.log 
+2026/01/07-20:45:08.982 f9818 Delete type=0 #13
+2026/01/07-20:45:08.982 f9818 Delete type=0 #7
+2026/01/07-20:45:08.982 f9818 Delete type=0 #4
+2026/01/07-20:45:08.982 f9818 Delete type=0 #10
+2026/01/07-20:45:08.982 f9818 Delete type=0 #16
+2026/01/07-20:45:08.982 f9818 Delete type=0 #3
+2026/01/07-20:45:08.982 f9818 Delete type=2 #14
+2026/01/07-20:45:08.982 f9818 Delete type=2 #17
+2026/01/07-20:45:08.982 f9818 Delete type=2 #11
+2026/01/07-20:45:08.982 f9818 Delete type=2 #8
+2026/01/07-20:45:08.982 f9818 Delete type=0 #26
+2026/01/07-20:45:08.982 f9818 Delete type=0 #19
+2026/01/07-20:45:08.982 f9818 Delete type=0 #23

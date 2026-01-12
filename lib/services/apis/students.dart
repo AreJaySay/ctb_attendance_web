@@ -16,21 +16,21 @@ class StudentApis{
         if (dataSnapshot.exists) {
           final data = dataSnapshot.value;
           if (data is Map) {
-            if(userModel.loggedUser.value["type"] == "teacher"){
-              studentsModel.updateSearch(data: data.values.toList().where((s) => s["year"] == userModel.loggedUser.value["students_handled_grade"] && s["section"] == userModel.loggedUser.value["students_handled_section"]).toList());
-              studentsModel.update(data: data.values.toList().where((s) => s["year"] == userModel.loggedUser.value["students_handled_grade"] && s["section"] == userModel.loggedUser.value["students_handled_section"]).toList());
-            }else{
+            // if(userModel.loggedUser.value["type"] == "teacher"){
+            //   studentsModel.updateSearch(data: data.values.toList().where((s) => s["year"] == userModel.loggedUser.value["students_handled_grade"] && s["section"] == userModel.loggedUser.value["students_handled_section"]).toList());
+            //   studentsModel.update(data: data.values.toList().where((s) => s["year"] == userModel.loggedUser.value["students_handled_grade"] && s["section"] == userModel.loggedUser.value["students_handled_section"]).toList());
+            // }else{
               studentsModel.updateSearch(data: data.values.toList());
               studentsModel.update(data: data.values.toList());
-            }
+            // }
           } else if (data is List) {
-            if(userModel.loggedUser.value["type"] == "teacher"){
-              studentsModel.updateSearch(data: data.where((s) => s["year"] == userModel.loggedUser.value["students_handled_grade"] && s["section"] == userModel.loggedUser.value["students_handled_section"]).toList());
-              studentsModel.update(data: data.where((s) => s["year"] == userModel.loggedUser.value["students_handled_grade"] && s["section"] == userModel.loggedUser.value["students_handled_section"]).toList());
-            }else{
+            // if(userModel.loggedUser.value["type"] == "teacher"){
+            //   studentsModel.updateSearch(data: data.where((s) => s["year"] == userModel.loggedUser.value["students_handled_grade"] && s["section"] == userModel.loggedUser.value["students_handled_section"]).toList());
+            //   studentsModel.update(data: data.where((s) => s["year"] == userModel.loggedUser.value["students_handled_grade"] && s["section"] == userModel.loggedUser.value["students_handled_section"]).toList());
+            // }else{
               studentsModel.updateSearch(data: data);
               studentsModel.update(data: data);
-            }
+            // }
           }
         } else {
           studentsModel.update(data: []);

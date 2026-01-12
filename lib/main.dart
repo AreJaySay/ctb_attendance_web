@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _teacherApis.get();
       SharedPreferences prefs = await SharedPreferences.getInstance();
       Future.delayed(Duration(seconds: 5), ()async {
-        List _teacher = teachersModel.value.where((s) => s["email"] == prefs.getString('email') && converterModels.hexToString(s["pass"]) == prefs.getString('pass')).toList();
+        List _teacher = teachersModel.value.where((s) => s["email"] == prefs.getString('email') && converterModels.hexToString(s["pass"].tos) == prefs.getString('pass')).toList();
         List _admin = adminModel.value.where((s) => s["email"] == prefs.getString('email') && converterModels.hexToString(s["pass"]) == prefs.getString('pass')).toList();
         print("GET LOGGED USER ${_admin} || ${_teacher}");
         if(_admin.isEmpty && _teacher.isEmpty){

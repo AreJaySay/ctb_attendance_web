@@ -62,8 +62,8 @@ class _EditModalState extends State<EditModal> {
       _lrn.text = "${widget.details["lrn"]}";
       _phone.text = "${widget.details["phone"]}";
       _gender = "${widget.details["gender"] ?? ""}";
-      _year = widget.details["year"];
-      _section = widget.details["section"];
+      _year = widget.details["year"] ?? "";
+      _section = widget.details["section"] ?? "";
       _base64 = widget.details["base64Image"];
       _pickedImageBytes = widget.details["base64Image"] != "" ? base64Decode(widget.details["base64Image"]) : null;
     }
@@ -89,9 +89,7 @@ class _EditModalState extends State<EditModal> {
         clipBehavior: Clip.none,
         children: <Widget>[
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: ListView(
               children: [
                 SizedBox(
                   height: 30,
@@ -271,93 +269,93 @@ class _EditModalState extends State<EditModal> {
 
                   },
                 ),
-                if(userModel.loggedUser.value["type"] != "teacher")...{
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
-                        borderRadius: BorderRadius.all(Radius.circular(1000)),
-                      ),
-                    ),
-                    child: DropdownButton<String>(
-                      focusColor: Colors.white,
-                      style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      items: <String>[
-                        'Grade 3',
-                        'Grade 4',
-                      ].map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
-                        );
-                      }).toList(),
-                      hint: Text(_year.isEmpty
-                          ? 'Year'
-                          : _year,style: TextStyle(fontFamily: "OpenSans",fontSize: 16, color: _year.isEmpty ? Colors.grey : Colors.black),),
-                      borderRadius: BorderRadius.circular(10),
-                      underline: SizedBox(),
-                      isExpanded: true,
-                      onChanged: (value) {
-                        if (value != null) {
-                          setState(() {
-                            _year = value;
-                            if(value == "Grade 3"){
-                              _section = "Acicia";
-                            }
-                          });
-                        }
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  IgnorePointer(
-                    ignoring: _year != "Grade 4",
-                    child: Container(
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
-                          borderRadius: BorderRadius.all(Radius.circular(1000)),
-                        ),
-                      ),
-                      child: DropdownButton<String>(
-                        focusColor: Colors.white,
-                        style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        items: <String>[
-                          'Earth',
-                          'Jupiter',
-                        ].map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
-                          );
-                        }).toList(),
-                        hint: Text(_year.isEmpty
-                            ? 'Section'
-                            : _year != "Grade 4" ? "Acicia" : _section,style: TextStyle(fontFamily: "OpenSans",fontSize: 16, color: _year.isEmpty ? Colors.grey : Colors.black),),
-                        borderRadius: BorderRadius.circular(10),
-                        underline: SizedBox(),
-                        isExpanded: true,
-                        onChanged: (value) {
-                          if (value != null) {
-                            setState(() {
-                              _section = value;
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                },
-                Spacer(),
+                  // SizedBox(
+                  //   height: 15,
+                  // ),
+                  // IgnorePointer(
+                  //   ignoring: widget.isEdit,
+                  //   child: Container(
+                  //     decoration: ShapeDecoration(
+                  //       color: Colors.white,
+                  //       shape: RoundedRectangleBorder(
+                  //         side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
+                  //         borderRadius: BorderRadius.all(Radius.circular(1000)),
+                  //       ),
+                  //     ),
+                  //     child: DropdownButton<String>(
+                  //       focusColor: Colors.white,
+                  //       style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
+                  //       padding: EdgeInsets.symmetric(horizontal: 15),
+                  //       items: <String>[
+                  //         'Grade 3',
+                  //         'Grade 4',
+                  //       ].map((String value) {
+                  //         return DropdownMenuItem<String>(
+                  //           value: value,
+                  //           child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
+                  //         );
+                  //       }).toList(),
+                  //       hint: Text(_year.isEmpty
+                  //           ? 'Year'
+                  //           : _year,style: TextStyle(fontFamily: "OpenSans",fontSize: 16, color: _year.isEmpty ? Colors.grey : Colors.black),),
+                  //       borderRadius: BorderRadius.circular(10),
+                  //       underline: SizedBox(),
+                  //       isExpanded: true,
+                  //       onChanged: (value) {
+                  //         if (value != null) {
+                  //           setState(() {
+                  //             _year = value;
+                  //             if(value == "Grade 3"){
+                  //               _section = "Acicia";
+                  //             }
+                  //           });
+                  //         }
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 15,
+                  // ),
+                  // Container(
+                  //   decoration: ShapeDecoration(
+                  //     color: Colors.white,
+                  //     shape: RoundedRectangleBorder(
+                  //       side: BorderSide(width: 1.0, style: BorderStyle.solid, color: colors.blue.withOpacity(0.1)),
+                  //       borderRadius: BorderRadius.all(Radius.circular(1000)),
+                  //     ),
+                  //   ),
+                  //   child: DropdownButton<String>(
+                  //     focusColor: Colors.white,
+                  //     style: TextStyle(fontFamily: "OpenSans",fontSize: 16),
+                  //     padding: EdgeInsets.symmetric(horizontal: 15),
+                  //     items: <String>[
+                  //       'Earth',
+                  //       'Jupiter',
+                  //     ].map((String value) {
+                  //       return DropdownMenuItem<String>(
+                  //         value: value,
+                  //         child: Text(value,style: TextStyle(fontFamily: "OpenSans",fontSize: 15),),
+                  //       );
+                  //     }).toList(),
+                  //     hint: Text(_year.isEmpty
+                  //         ? 'Section'
+                  //         : _year != "Grade 4" ? "Acicia" : _section,style: TextStyle(fontFamily: "OpenSans",fontSize: 16, color: _year.isEmpty ? Colors.grey : Colors.black),),
+                  //     borderRadius: BorderRadius.circular(10),
+                  //     underline: SizedBox(),
+                  //     isExpanded: true,
+                  //     onChanged: (value) {
+                  //       if (value != null) {
+                  //         setState(() {
+                  //           _section = value;
+                  //         });
+                  //       }
+                  //     },
+                  //   ),
+                  // ),
+                 SizedBox(
+                   height: 70,
+                 ),
                 _materialbutton.materialButton(widget.isEdit ? "Update" : "Submit", (){
                   if(_name.text.isEmpty || _age.text.isEmpty || _lrn.text.isEmpty || _phone == ""){
                     _snackbarMessage.snackbarMessage(context, message: "All fields are required.", is_error: true);
@@ -368,8 +366,8 @@ class _EditModalState extends State<EditModal> {
                       "lrn": _lrn.text,
                       "phone": _phone.text,
                       "gender": _gender,
-                      "year": userModel.loggedUser.value["type"] == "teacher" ? userModel.loggedUser.value["students_handled_grade"] : _year,
-                      "section": userModel.loggedUser.value["type"] == "teacher" ? userModel.loggedUser.value["students_handled_section"] : _section,
+                      "year": _year,
+                      "section": _section,
                       "base64Image": _base64,
                     };
                     print(_payload);

@@ -37,9 +37,9 @@ class _LandingState extends State<Landing> {
       _icons = ["student", "attendance", "reports"];
       _pages = [Students(), Attendance(), Reports()];
     }else{
-      _title = ["Students", "Teachers", "Attendance", "Reports"];
-      _icons = ["student", "teacher", "attendance", "reports"];
-      _pages = [Students(), Teachers(), Attendance(), Reports()];
+      _title = ["Students", "Teachers", "Attendance"];
+      _icons = ["student", "teacher", "attendance"];
+      _pages = [Students(), Teachers(), Attendance()];
     }
     _notificationApis.get();
     _notificationChecker();
